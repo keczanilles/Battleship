@@ -24,12 +24,14 @@ namespace Battleship.Program
 
             while (true)
             {
+                program._display.Message("Welcome to the Battleship Game!");
                 switch (program.Menu())
                 {
                     case 1:
-                        program._display.Message("Please select the size of the board! (between 10 and 20):");
-                        program._boardSize = program._input.BoardSizeValidation();
+                        program._display.Message("Please select the game mode:");
                         program._gameMode = program.GameMode();
+                        program._display.Message("Please select the size of the board: /10 - 20/");
+                        program._boardSize = program._input.BoardSizeValidation();
                         Game game = new Game(program._boardSize, program._gameMode);
                         Console.ReadLine();
                         break;

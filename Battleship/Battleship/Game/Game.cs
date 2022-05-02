@@ -4,18 +4,15 @@ namespace Battleship.Gameplay
 {
     public class Game : Program.Battleship
     {
-        private bool _isOver;
         private Board _board;
 
         public Game(int boardSize, int gameMode)
         {
             _boardSize = boardSize;
             _gameMode = gameMode;
-            _isOver = false;
             _board = new Board(_boardSize, _gameMode);
             Play();
         }
-
 
         public void Play()
         {
@@ -26,6 +23,13 @@ namespace Battleship.Gameplay
         {
             throw new NotImplementedException();
         }
+
+        public void PlacementPhase(Player player)
+        {
+
+        }
+
+
 
     }
 }

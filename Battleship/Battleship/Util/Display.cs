@@ -9,7 +9,6 @@ namespace Battleship.Util
 
         public void Menu(params string[] options)
         {
-            Console.WriteLine("Please select an option:");
             for (int i = 0; i < options.Length; i++)
             {
                 Console.WriteLine($"{i+1}. {options[i]}");

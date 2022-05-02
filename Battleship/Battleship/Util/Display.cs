@@ -1,14 +1,13 @@
-﻿using Battleship.Game;
+﻿using Battleship.Gameplay;
 
 namespace Battleship.Util
 {
     public class Display
     {
-
         public Display()
         { }
 
-        public void GameMenu(params string[] options)
+        public void Menu(params string[] options)
         {
             Console.WriteLine("Please select an option:");
             for (int i = 0; i < options.Length; i++)
@@ -17,32 +16,26 @@ namespace Battleship.Util
             }
         }
 
-        public void PrintMessage(string message)
+        public void Message(string message)
         {
             Console.WriteLine(message);
         }
 
-        
-        public void PrintBoard(int boardSize, Board board)
+        public void Board(int boardSize, Board board)
         {
-            
             Console.WriteLine();
-
             for (int i = 1; i < boardSize + 1; i++)
             {
                 if (i == 1)
                 {
-                    Console.Write($"   {i}  ");
+                    Console.Write($"   {i} ");
                 }
                 else
                 {
-                    Console.Write(i < 9 ? $"{i}  " : $"{i} ");
+                    Console.Write(i < 10 ? $" {i} " : $"{i} ");
                 }
-
             }
-
             Console.WriteLine();
-
             for (int row = 0; row < boardSize; row++)
             {
                 Console.Write($"{(char)(row + 65)}  ");
@@ -54,7 +47,6 @@ namespace Battleship.Util
                 }
                 Console.WriteLine();
             }
-
             Console.WriteLine();
         }
     }

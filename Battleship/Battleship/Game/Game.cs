@@ -1,26 +1,27 @@
 ﻿using Battleship.Util;
 
-namespace Battleship.Game
+namespace Battleship.Gameplay
 {
-    public class Game
+    public class Game : Program.Battleship
     {
         private bool _isOver;
-        private int _boardSize;
-        private int _gameMode;
         private Board _board;
+
         public Game(int boardSize, int gameMode)
         {
-            _isOver = false;
             _boardSize = boardSize;
             _gameMode = gameMode;
-            _board = new Board(boardSize);
+            _isOver = false;
+            _board = new Board(_boardSize, _gameMode);
+            Play();
         }
 
 
         public void Play()
         {
-            new Display().PrintBoard(_boardSize, _board);
+            _display.Board(_boardSize, _board);
         }
+
         public bool IsGameOver()
         {
             throw new NotImplementedException();

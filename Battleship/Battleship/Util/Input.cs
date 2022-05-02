@@ -2,50 +2,43 @@
 {
     public class Input
     {
-        public string SelectMenu()
+        public string Select()
         {
             return Console.ReadLine();
         }
 
-        public bool InputValidation(int length, string input)
+        public bool InputValidation(int possibilities, string input)
         {
-            int[] inputNumber = new int[length];
-            for (int i = 0; i < length; i++)
+            string[] inputNumber = new string[possibilities];
+            for (int i = 0; i < possibilities; i++)
             {
-                inputNumber[i] = i+1;
+                inputNumber[i] = (i + 1).ToString();
             }
-            if (inputNumber.Contains(int.Parse(input)))
+            if (inputNumber.Contains(input))
             {
                 return true;
             }
             return false;
         }
+
         public int BoardSizeValidation()
         {
             while (true)
             {
-                string size = SelectMenu();
+                string size = Select();
                 try
                 {
-                    if (int.Parse(size) >=10 && int.Parse(size) <=20)
+                    if (int.Parse(size) >= 10 && int.Parse(size) <= 20)
                     {
                         return int.Parse(size);
                     }
-                    else
-                    {
-                        new Display().PrintMessage("Please provide a number between 10 and 20!");
-                        continue;
-                    }
-                } catch (FormatException)
+                    new Display().Message("Please provide a number between 10 and 20!");
+                }
+                catch (FormatException)
                 {
-                    new Display().PrintMessage("Please provide a number between 10 and 20!");
+                    new Display().Message("Please provide a number between 10 and 20!");
                 }
             }
-               
-            
-            
         }
-        
-
     }
 }

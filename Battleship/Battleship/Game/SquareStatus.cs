@@ -1,4 +1,4 @@
-﻿namespace Battleship.Game
+﻿namespace Battleship.Gameplay
 {
     public enum SquareStatus
     {

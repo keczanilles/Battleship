@@ -7,7 +7,7 @@ namespace Battleship.Program
         private Display _display;
         private Input _input;
         private int _gameMode;
-        private int _boardSize;
+        public int _boardSize { get; private set; }
 
         public Battleship()
         {

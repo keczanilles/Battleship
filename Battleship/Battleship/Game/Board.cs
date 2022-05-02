@@ -13,5 +13,15 @@
                 }
             }
         }
+
+        public bool IsPlacementOk()
+        {
+            throw new NotImplementedException();
+        }
+
+        public SquareStatus CheckSquare((int, int) position)
+        {
+            return _ocean[position.Item1, position.Item2]._squareStatus;
+        }
     }
 }

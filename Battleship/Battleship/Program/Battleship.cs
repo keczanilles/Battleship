@@ -1,4 +1,5 @@
 ﻿using Battleship.Util;
+using Battleship.Game;
 
 namespace Battleship.Program
 {
@@ -27,7 +28,8 @@ namespace Battleship.Program
                     case 1:
                         program._display.PrintMessage("Please select the size of the board!(between 10 and 20): ");
                         program._boardSize = program._input.BoardSizeValidation();
-                        program._gameMode = program.GameMode();
+                        //program._gameMode = program.GameMode();
+                        new Game.Game(program._boardSize, 1).Play();
                         break;
                     case 2:
                         Console.WriteLine("High score");

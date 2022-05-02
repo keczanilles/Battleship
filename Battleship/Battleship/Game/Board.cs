@@ -5,11 +5,12 @@
         private Square[,] _ocean;
         public Board(int boardSize)
         {
+            _ocean = new Square[boardSize, boardSize];
             for (int row = 0; row < boardSize; row++)
             {
-                for(int col = 0; col < boardSize; col++)
+                for (int col = 0; col < boardSize; col++)
                 {
-                    _ocean[row, col] = new Square((row,col));
+                    _ocean[row, col] = new Square((row, col));
                 }
             }
         }

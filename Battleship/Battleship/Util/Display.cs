@@ -6,17 +6,23 @@
         public Display()
         { }
 
-        public void GameMenu()
+        public void GameMenu(params string[] options)
         {
             Console.WriteLine("Please select an option:");
-            Console.WriteLine("1. New Game");
-            Console.WriteLine("2. Display high-scores");
-            Console.WriteLine("3. Exit");
+            for (int i = 0; i < options.Length; i++)
+            {
+                Console.WriteLine($"{i+1}. {options[i]}");
+            }
         }
 
-        public void PrintError(string errorMessage)
+        public void PrintMessage(string message)
         {
-            Console.WriteLine(errorMessage);
+            Console.WriteLine(message);
+        }
+
+        public void BoardSize()
+        {
+            Console.WriteLine("Please select the size of the board!(between 10 and 20): ");
         }
     }
 }

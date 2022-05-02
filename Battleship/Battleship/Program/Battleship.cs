@@ -17,6 +17,7 @@ namespace Battleship.Program
 
         public static void Main()
         {
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
             var program = new Battleship();
 
             while (true)
@@ -51,8 +52,6 @@ namespace Battleship.Program
             return int.Parse(selectMenu);
         }
 
-
-
         public int GameMode()
         {
             _display.GameMenu("Player vs. Player", "Player vs. Computer");
@@ -63,11 +62,6 @@ namespace Battleship.Program
                 selected = Console.ReadLine();
             }
             return int.Parse(selected);
-        }
-
-        public int GetBoardSize(string size)
-        {
-            return int.Parse(size);
         }
     }
 }

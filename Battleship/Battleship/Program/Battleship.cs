@@ -1,4 +1,5 @@
-﻿using Battleship.Util;
+﻿using Battleship.Game;
+using Battleship.Util;
 
 namespace Battleship.Program
 {

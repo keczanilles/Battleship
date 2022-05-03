@@ -8,22 +8,13 @@ namespace Battleship.Gameplay
         private Board _board;
         private Player _playerOne;
         private Player _playerTwo;
-        private List<ShipType> _ships;
-
+        
         public Game(int boardSize, int gameMode)
         {
             _boardSize = boardSize;
             _gameMode = gameMode;
             _board = new Board(_boardSize, _gameMode);
-            _ships = new List<ShipType>()
-            {
-                ShipType.Carrier,
-                ShipType.Battleship,
-                ShipType.Cruiser,
-                ShipType.Submarine,
-                ShipType.Destroyer
-            };
-
+          
             Play();
         }
 
@@ -50,12 +41,12 @@ namespace Battleship.Gameplay
 
         public void PlayerPlacement(BoardFactory boardFactory, Player playerOne, Player playerTwo)
         {
-            for (int counter = 0; counter < 5; counter++)
+            for (int index = 0; index < 5; index++)
             {
-                _display.PlacementTurn(counter, playerOne, _ships);
-                boardFactory.ManualPlacement(playerOne, _board, _ships[counter]);
-                _display.PlacementTurn(counter, playerTwo, _ships);
-                boardFactory.ManualPlacement(playerTwo, _board, _ships[counter]);
+                _display.PlacementTurn(playerOne, (ShipType)index);
+                boardFactory.ManualPlacement(playerOne, _board, (ShipType)index);
+                _display.PlacementTurn(playerTwo, (ShipType)index);
+                boardFactory.ManualPlacement(playerTwo, _board, (ShipType)index);
             }
         }
 

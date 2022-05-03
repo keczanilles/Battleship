@@ -56,9 +56,9 @@ namespace Battleship.Util
             Console.WriteLine();
         }
 
-        public void PlacementTurn(int index, Player player, List<ShipType> ships)
+        public void PlacementTurn(Player player, ShipType ship)
         {
-            Console.WriteLine($"It's {player.Name}'s turn, please place down your {ships[index]} which is {Ship.ShipLength(ships[index])} squares long.");
+            Console.WriteLine($"It's {player.Name}'s turn, please place down your {ship} which is {Ship.GetLength(ship)} squares long.");
         }
     }
 }

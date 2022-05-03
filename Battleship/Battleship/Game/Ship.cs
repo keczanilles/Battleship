@@ -21,7 +21,7 @@ namespace Battleship.Gameplay
             return _ships;
         }
 
-        public static int ShipLength(ShipType shiptype)
+        public static int GetLength(ShipType shiptype)
         {
             switch (shiptype)
             {

@@ -13,7 +13,7 @@ namespace Battleship.Game
         public void ManualPlacement(Player player, Board board, ShipType shipType)
         {
             Ship ship = new Ship();
-            int shipLength = Ship.ShipLength(shipType);
+            int shipLength = Ship.GetLength(shipType);
 
             bool isOk = false;
             while (!isOk)

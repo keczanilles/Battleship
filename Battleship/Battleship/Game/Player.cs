@@ -9,6 +9,7 @@
 
         public Player(string name)
         {
+            _ships = new List<Ship>();
             Name = name;
         }
 

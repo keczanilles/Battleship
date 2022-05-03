@@ -46,6 +46,10 @@ namespace Battleship.Game
                     player.AddShip(ship);
                     isOk = true;
                 }
+                else
+                {
+                    Console.WriteLine("almaa");
+                }
                 
             }
       

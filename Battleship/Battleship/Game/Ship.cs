@@ -6,8 +6,7 @@ namespace Battleship.Gameplay
     {
         private List<Square> _ships;
         private int _length;
-
-
+        
         public Ship(int length)
         {
             _ships = new List<Square>();
@@ -17,6 +16,11 @@ namespace Battleship.Gameplay
         public void AddSquare(Square square)
         {
             _ships.Add(square);
+        }
+
+        public List<Square> GetSquares()
+        {
+            return _ships;
         }
 
         public static int ShipLength(ShipType shiptype)

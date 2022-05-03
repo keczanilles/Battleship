@@ -11,5 +11,9 @@
         {
             Name = name;
         }
+        public void AddShip(Ship ship)
+        {
+            _ships.Add(ship);
+        }
     }
 }

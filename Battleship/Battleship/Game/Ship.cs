@@ -5,11 +5,13 @@ namespace Battleship.Gameplay
     public class Ship
     {
         private List<Square> _ships;
+        private int _length;
 
 
-        public Ship()
+        public Ship(int length)
         {
             _ships = new List<Square>();
+            _length = length;
         }
 
         public void AddSquare(Square square)

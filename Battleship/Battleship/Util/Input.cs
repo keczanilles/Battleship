@@ -51,7 +51,6 @@
                     int row = char.ToUpper(input[0]) - 65;
                     int col = (input[1] - '0') - 1;
                     Direction direction;
-
                     if (Char.ToUpper(input[2]) == 'H')
                     {
                         direction = Direction.Horizontal;
@@ -65,16 +64,13 @@
                         new Display().Message("Not valid direction!");
                         continue;
                     }
-
                     return new Tuple<int, int, Direction>(row, col, direction);
-
                 }
                 else if (input.Length == 4 && Char.IsLetter(input[0]) && Char.IsDigit(input[1]) && Char.IsDigit(input[2]) && Char.IsLetter(input[3]))
                 {
                     int row = char.ToUpper(input[0]) - 65;
                     int col = (((input[1] - '0') * 10) + (input[2] - '0')) - 1;
                     Direction direction;
-
                     if (Char.ToUpper(input[3]) == 'H')
                     {
                         direction = Direction.Horizontal;
@@ -88,7 +84,6 @@
                         new Display().Message("Not valid direction!");
                         continue;
                     }
-
                     return new Tuple<int, int, Direction>(row, col, direction);
                 } 
                 else

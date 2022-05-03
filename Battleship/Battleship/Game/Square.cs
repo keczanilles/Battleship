@@ -3,12 +3,17 @@
     public class Square
     {
         public (int,int) Position { get; set; }
-        public SquareStatus _squareStatus;
+        private SquareStatus _squareStatus;
 
         public Square((int,int) position, SquareStatus status)
         {
             _squareStatus = status;
             Position = position;
+        }
+
+        public SquareStatus GetSquareStatus()
+        {
+            return _squareStatus;
         }
 
         public static string GetCharacter(SquareStatus status)

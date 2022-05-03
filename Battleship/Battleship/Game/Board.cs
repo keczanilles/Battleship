@@ -25,10 +25,8 @@ namespace Battleship.Gameplay
         {
             int row = startPosition.Item1;
             int col = startPosition.Item2;
-            Console.WriteLine($"{row}-{col}");
             Direction direction = startPosition.Item3;
-            List<Ship> ships = player.ReturnShips();
-            Console.WriteLine(ships.ToString());
+            List<Ship> ships = player.GetShips();
 
             if (direction == Direction.Horizontal)
             {
@@ -69,7 +67,7 @@ namespace Battleship.Gameplay
             {
                 foreach (Ship ship in ships)
                 {
-                    bool hasNeighbours = false;
+                    bool hasNeighbours;
                     for (int i = 0; i < shipLength; i++)
                     {
                         hasNeighbours = CheckNeighbours(ship, row, col + i);
@@ -91,11 +89,10 @@ namespace Battleship.Gameplay
             {
                 foreach (Ship ship in ships)
                 {
-                    bool hasNeighbours = false;
+                    bool hasNeighbours;
                     for (int i = 0; i < shipLength; i++)
                     {
                         hasNeighbours = CheckNeighbours(ship, row + i, col);
-
                         if (hasNeighbours)
                         {
                             return false;
@@ -109,7 +106,7 @@ namespace Battleship.Gameplay
 
         public SquareStatus CheckSquare((int, int) position)
         {
-            return _ocean[position.Item1, position.Item2]._squareStatus;
+            return _ocean[position.Item1, position.Item2].GetSquareStatus();
         }
     }
 }

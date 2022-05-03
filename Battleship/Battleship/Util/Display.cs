@@ -8,17 +8,23 @@ namespace Battleship.Util
         public Display()
         { }
 
-        public void Menu(params string[] options)
+        public static void Clear(int second)
         {
-            for (int i = 0; i < options.Length; i++)
-            {
-                Console.WriteLine($"{i+1}. {options[i]}");
-            }
+            Thread.Sleep(second * 1000);
+            Console.Clear();
         }
 
         public void Message(string message)
         {
             Console.WriteLine(message);
+        }
+
+        public void Menu(params string[] options)
+        {
+            for (int i = 0; i < options.Length; i++)
+            {
+                Console.WriteLine($"{i + 1}. {options[i]}");
+            }
         }
 
         public void Board(int boardSize, Board board)
@@ -50,16 +56,8 @@ namespace Battleship.Util
             Console.WriteLine();
         }
 
-        public void Ships(int index, Player player)
+        public void PlacementTurn(int index, Player player, List<ShipType> ships)
         {
-            List<ShipType> ships = new List<ShipType>()
-            {
-                ShipType.Carrier,
-                ShipType.Battleship,
-                ShipType.Cruiser,
-                ShipType.Submarine,
-                ShipType.Destroyer
-            };
             Console.WriteLine($"It's {player.Name}'s turn, please place down your {ships[index]} which is {Ship.ShipLength(ships[index])} squares long.");
         }
     }

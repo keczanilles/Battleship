@@ -4,7 +4,6 @@
     {
         private List<Ship> _ships;
         public bool IsAlive { get; }
-
         public string Name { get; private set; }
 
         public Player(string name)
@@ -18,7 +17,7 @@
             _ships.Add(ship);
         }
 
-        public List<Ship> ReturnShips()
+        public List<Ship> GetShips()
         {
             return _ships;
         } 

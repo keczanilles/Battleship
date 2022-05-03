@@ -1,4 +1,5 @@
-﻿using Battleship.Gameplay;
+﻿using Battleship.Game;
+using Battleship.Gameplay;
 
 namespace Battleship.Util
 {
@@ -47,6 +48,19 @@ namespace Battleship.Util
                 Console.WriteLine();
             }
             Console.WriteLine();
+        }
+
+        public void Ships(int index, Player player)
+        {
+            List<ShipType> ships = new List<ShipType>()
+            {
+                ShipType.Carrier,
+                ShipType.Battleship,
+                ShipType.Cruiser,
+                ShipType.Submarine,
+                ShipType.Destroyer
+            };
+            Console.WriteLine($"It's {player.Name}'s turn, please place down your {ships[index]} which is {Ship.ShipLength(ships[index])} squares long.");
         }
     }
 }

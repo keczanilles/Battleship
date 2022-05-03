@@ -1,4 +1,5 @@
 ﻿using Battleship.Gameplay;
+using Battleship.Util;
 
 namespace Battleship.Game
 {
@@ -15,6 +16,8 @@ namespace Battleship.Game
             Ship Cruiser = new Ship();
             Ship Submarine = new Ship();
             Ship Destroyer = new Ship();
+            Tuple<int, int, Direction> startPosition = _input.PlacementValidation();
+            Console.WriteLine(startPosition);
 
             
 

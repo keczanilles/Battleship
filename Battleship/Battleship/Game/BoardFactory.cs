@@ -21,23 +21,34 @@ namespace Battleship.Game
             };
             int shipLength = Ship.ShipLength(ships[index]);
             Ship ship = new Ship(shipLength);
-            Tuple<int, int, Direction> startPosition = _input.PlacementValidation();
-            for (int i = 0; i < shipLength; i++)
+
+            bool isOk = false;
+            while (!isOk)
             {
-                
-                if (startPosition.Item3 == Direction.Horizontal)
+                Tuple<int, int, Direction> startPosition = _input.PlacementValidation();
+                if (board.IsPlacementOk(player, startPosition, shipLength))
                 {
-                    Square square = new Square((startPosition.Item1, startPosition.Item2 + i), SquareStatus.Ship);
-                    ship.AddSquare(square);
-                }
-                else if (startPosition.Item3 == Direction.Vertical)
-                {
-                    Square square = new Square((startPosition.Item1 + i, startPosition.Item2), SquareStatus.Ship);
-                    ship.AddSquare(square);
+                    for (int i = 0; i < shipLength; i++)
+                    {
+
+                        if (startPosition.Item3 == Direction.Horizontal)
+                        {
+                            Square square = new Square((startPosition.Item1, startPosition.Item2 + i), SquareStatus.Ship);
+                            ship.AddSquare(square);
+                        }
+                        else if (startPosition.Item3 == Direction.Vertical)
+                        {
+                            Square square = new Square((startPosition.Item1 + i, startPosition.Item2), SquareStatus.Ship);
+                            ship.AddSquare(square);
+                        }
+
+                    }
+                    player.AddShip(ship);
+                    isOk = true;
                 }
                 
             }
-            player.AddShip(ship);
+      
 
 
 

@@ -118,6 +118,10 @@ namespace Battleship.Util
                         {
                             return Tuple.Create(row, col);
                         }
+                        else
+                        {
+                            new Display().Message("You have already tried this one!");
+                        }
                     }
                     else
                     {
@@ -141,15 +145,15 @@ namespace Battleship.Util
                         {
                             return Tuple.Create(row, col);
                         }
+                        else
+                        {
+                            new Display().Message("You have already tried this one!");
+                        }
                     }
                     else
                     {
                         new Display().Message("Not valid option!");
                     }
-                }
-                else
-                {
-                    new Display().Message("You have already tried this one!");
                 }
             }
         }

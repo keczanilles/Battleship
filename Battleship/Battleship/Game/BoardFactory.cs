@@ -9,18 +9,11 @@ namespace Battleship.Game
         {
 
         }
-        public void ManualPlacement(Player player, Board board, int index)
+
+        public void ManualPlacement(Player player, Board board, ShipType shipType)
         {
-            List<ShipType> ships = new List<ShipType>()
-            {
-                ShipType.Carrier,
-                ShipType.Battleship,
-                ShipType.Cruiser,
-                ShipType.Submarine,
-                ShipType.Destroyer
-            };
-            int shipLength = Ship.ShipLength(ships[index]);
-            Ship ship = new Ship(shipLength);
+            Ship ship = new Ship();
+            int shipLength = Ship.GetLength(shipType);
 
             bool isOk = false;
             while (!isOk)
@@ -30,34 +23,25 @@ namespace Battleship.Game
                 {
                     for (int i = 0; i < shipLength; i++)
                     {
-
                         if (startPosition.Item3 == Direction.Horizontal)
                         {
-                            Square square = new Square((startPosition.Item1, startPosition.Item2 + i), SquareStatus.Ship);
+                            Square square = new Square(new Tuple<int, int>(startPosition.Item1, startPosition.Item2 + i), SquareStatus.Ship);
                             ship.AddSquare(square);
                         }
                         else if (startPosition.Item3 == Direction.Vertical)
                         {
-                            Square square = new Square((startPosition.Item1 + i, startPosition.Item2), SquareStatus.Ship);
+                            Square square = new Square(new Tuple<int, int>(startPosition.Item1 + i, startPosition.Item2), SquareStatus.Ship);
                             ship.AddSquare(square);
                         }
-
                     }
                     player.AddShip(ship);
                     isOk = true;
                 }
                 else
                 {
-                    Console.WriteLine("almaa");
+                    _display.Message("You can't place your ship here!");
                 }
-                
             }
-      
-
-
-
         }
-        
-
     }
 }

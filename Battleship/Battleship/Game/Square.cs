@@ -2,13 +2,23 @@
 {
     public class Square
     {
-        public (int,int) Position { get; set; }
-        public SquareStatus _squareStatus;
+        public Tuple<int, int> Position { get; set; }
+        private SquareStatus _squareStatus;
 
-        public Square((int,int) position, SquareStatus status)
+        public Square(Tuple<int, int> position, SquareStatus status)
         {
             _squareStatus = status;
             Position = position;
+        }
+
+        public SquareStatus GetSquareStatus()
+        {
+            return _squareStatus;
+        }
+
+        public void ChangeStatus(SquareStatus status)
+        {
+            _squareStatus = status;
         }
 
         public static string GetCharacter(SquareStatus status)
@@ -33,5 +43,6 @@
             }
             return empty;
         }
+
     }
 }

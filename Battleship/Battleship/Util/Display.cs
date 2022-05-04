@@ -8,12 +8,10 @@ namespace Battleship.Util
         public Display()
         { }
 
-        public void Menu(params string[] options)
+        public static void Clear(int second)
         {
-            for (int i = 0; i < options.Length; i++)
-            {
-                Console.WriteLine($"{i+1}. {options[i]}");
-            }
+            Thread.Sleep(second * 1000);
+            Console.Clear();
         }
 
         public void Message(string message)
@@ -21,7 +19,38 @@ namespace Battleship.Util
             Console.WriteLine(message);
         }
 
-        public void Board(int boardSize, Board board)
+        public void NewLine()
+        {
+            Console.Write(Environment.NewLine);
+        }
+
+        public void PrintLogo()
+        {
+            Console.Write(@"                                     |__
+                                     |\/
+                                     ---
+                                     / | [
+                              !      | |||
+                            _/|     _/|-++'
+                        +  +--|    |--|--|_ |-
+                     { /|__|  |/\__|  |--- |||__/
+                    +---------------___[}-_===_.'____               /\
+                ____`-' ||___-{]_| _[}-  |     |_[___\==--          \/   _
+ __..._____--==/___]_|__|_____________________________[___\==--___,-----' .7
+|                                                      Don Juan d'Hungary/
+ \_______________________________________________________________________|");
+            Console.WriteLine(Environment.NewLine);
+        }
+
+        public void Menu(params string[] options)
+        {
+            for (int i = 0; i < options.Length; i++)
+            {
+                Console.WriteLine($"{i + 1}. {options[i]}");
+            }
+        }
+
+        public void Board(Player player, Player enemy, int boardSize, Board board)
         {
             Console.WriteLine();
             for (int i = 1; i < boardSize + 1; i++)
@@ -39,28 +68,53 @@ namespace Battleship.Util
             for (int row = 0; row < boardSize; row++)
             {
                 Console.Write($"{(char)(row + 65)}  ");
-
                 for (int col = 0; col < boardSize; col++)
                 {
-                    SquareStatus squareStatus = board.CheckSquare((row, col));
-                    Console.Write(Square.GetCharacter(squareStatus));
+                    Console.Write(CheckSquareType(player, enemy, row, col, board));
                 }
                 Console.WriteLine();
             }
             Console.WriteLine();
         }
 
-        public void Ships(int index, Player player)
+        public string CheckSquareType(Player player, Player enemy, int row, int col, Board board)
         {
-            List<ShipType> ships = new List<ShipType>()
+            if (board._boardType)
             {
-                ShipType.Carrier,
-                ShipType.Battleship,
-                ShipType.Cruiser,
-                ShipType.Submarine,
-                ShipType.Destroyer
-            };
-            Console.WriteLine($"It's {player.Name}'s turn, please place down your {ships[index]} which is {Ship.ShipLength(ships[index])} squares long.");
+                foreach (Ship ship in player.GetShips())
+                {
+                    foreach (Square square in ship.GetSquares())
+                    {
+                        if (row == square.Position.Item1 && col == square.Position.Item2)
+                        {
+                            return Square.GetCharacter(square.GetSquareStatus());
+                        }
+                    }
+                }
+                return Square.GetCharacter(SquareStatus.Empty);
+            }
+            
+
+            if (player.Shots.Contains(new Tuple<int, int>(row, col)))
+            {
+                foreach (Ship ship in enemy.GetShips())
+                {
+                    foreach (Square square in ship.GetSquares())
+                    {
+                        if (square.Position.Item1 == row && square.Position.Item2 == col)
+                        {
+                            return Square.GetCharacter(SquareStatus.Hit);
+                        }
+                    }
+                }
+                return Square.GetCharacter(SquareStatus.Missed);
+            }
+            return Square.GetCharacter(SquareStatus.Empty);
+        }
+
+        public void PlacementTurn(Player player, ShipType ship)
+        {
+            Console.WriteLine($"It's {player.Name}'s turn, please place down your {ship} which is {Ship.GetLength(ship)} squares long.");
         }
     }
 }

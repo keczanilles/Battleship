@@ -31,6 +31,7 @@ namespace Battleship.Gameplay
             _playerTwo = new Player(playerTwoName);
 
             PlayerPlacement(boardFactory, _playerOne, _playerTwo);
+
         }
 
         public string GetName(string player)

@@ -1,29 +1,18 @@
-﻿using Battleship.Util;
+﻿using Battleship.Enum;
 
 namespace Battleship.Gameplay
 {
     public class Board
     {
-        private Square[,] _ocean;
         private int _boardSize;
         public bool _boardType { get; set; }
 
         public Board(int boardSize, int gameMode, bool type)
         {
-            _ocean = new Square[boardSize, boardSize];
             _boardSize = boardSize;
             _boardType = type;
-
-            for (int row = 0; row < boardSize; row++)
-            {
-                for (int col = 0; col < boardSize; col++)
-                {
-                    _ocean[row, col] = new Square(new Tuple<int, int>(row, col), SquareStatus.Empty);
-                }
-            }
         }
 
-        
         public bool IsPlacementOk(Player player, Tuple<int, int, Direction> startPosition, int shipLength)
         {
             int row = startPosition.Item1;
@@ -41,13 +30,11 @@ namespace Battleship.Gameplay
             }
         }
 
-
         public bool CheckNeighbours(Ship ship, int row, int col)
         {
             foreach (var square in ship.GetSquares())
             {
                 Tuple<int, int> shipPositions = new Tuple<int, int>(square.Position.Item1, square.Position.Item2);
-
                 List<Tuple<int, int>> neighbours = new List<Tuple<int, int>>()
                 {
                     Tuple.Create(row + 1, col),
@@ -55,7 +42,6 @@ namespace Battleship.Gameplay
                     Tuple.Create(row, col + 1),
                     Tuple.Create(row, col - 1)
                 };
-
                 if (neighbours.Contains(shipPositions))
                 {
                     return true;
@@ -105,11 +91,6 @@ namespace Battleship.Gameplay
                 return true;
             }
             return false;
-        }
-
-        public SquareStatus CheckSquare((int, int) position)
-        {
-            return _ocean[position.Item1, position.Item2].GetSquareStatus();
         }
     }
 }

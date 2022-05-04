@@ -1,11 +1,10 @@
-﻿namespace Battleship.Gameplay
+﻿namespace Battleship.Enum
 {
     public enum SquareStatus
     {
         Empty,
         Ship,
         Hit,
-        Missed,
-        Sunk
+        Missed
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Battleship.Gameplay
+﻿using Battleship.Enum;
+
+namespace Battleship.Gameplay
 {
     public class Square
     {
@@ -26,7 +28,6 @@
             string empty = ".  ";
             string ship = "B  ";
             string hit = "H  ";
-            string sunk = "S  ";
             string missed = "X  ";
             switch (status)
             {
@@ -36,8 +37,6 @@
                     return ship;
                 case SquareStatus.Hit:
                     return hit;
-                case SquareStatus.Sunk:
-                    return sunk;
                 case SquareStatus.Missed:
                     return missed;
             }

@@ -1,4 +1,5 @@
-﻿using Battleship.Game;
+﻿using Battleship.Enum;
+using Battleship.Game;
 using Battleship.Gameplay;
 
 namespace Battleship.Util
@@ -93,8 +94,6 @@ namespace Battleship.Util
                 }
                 return Square.GetCharacter(SquareStatus.Empty);
             }
-            
-
             if (player.Shots.Contains(new Tuple<int, int>(row, col)))
             {
                 foreach (Ship ship in enemy.GetShips())

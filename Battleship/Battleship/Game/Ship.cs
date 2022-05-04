@@ -1,4 +1,5 @@
-﻿using Battleship.Game;
+﻿using Battleship.Enum;
+using Battleship.Game;
 
 namespace Battleship.Gameplay
 {

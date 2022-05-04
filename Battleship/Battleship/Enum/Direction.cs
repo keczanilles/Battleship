@@ -1,4 +1,4 @@
-﻿namespace Battleship.Util
+﻿namespace Battleship.Enum
 {
     public enum Direction
     {

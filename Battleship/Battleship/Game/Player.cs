@@ -1,13 +1,14 @@
-﻿namespace Battleship.Gameplay
+﻿using Battleship.Enum;
+
+namespace Battleship.Gameplay
 {
     public class Player : Program.Battleship
     {
         private List<Ship> _ships;
-        public bool IsAlive { get; private set; }
+        public bool IsAlive { get; private set; } // megnézni csak get;
         public string Name { get; private set; }
         public List<Tuple<int, int>> Shots { get; private set; }
         
-
         public Player(string name)
         {
             _ships = new List<Ship>();
@@ -42,10 +43,10 @@
             }
         }
 
-        public void Attack(Player enemy)
+        public void Attack(Player enemy, int boardSize)
         {
             _display.Message($"It's {Name}'s turn to attack!");
-            Tuple<int, int> shot = _input.ShotValidation(Shots);
+            Tuple<int, int> shot = _input.ShotValidation(Shots, boardSize);
             Shots.Add(shot);
             foreach (Ship ship in enemy.GetShips())
             {

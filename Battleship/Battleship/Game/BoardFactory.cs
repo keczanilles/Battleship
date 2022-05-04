@@ -1,5 +1,5 @@
 ﻿using Battleship.Gameplay;
-using Battleship.Util;
+using Battleship.Enum;
 
 namespace Battleship.Game
 {
@@ -10,12 +10,12 @@ namespace Battleship.Game
 
         }
 
-        public void ManualPlacement(Player player, Board board, ShipType shipType)
+        public void ManualPlacement(Player player, Board board, Enum.ShipType shipType)
         {
             Ship ship = new Ship();
             int shipLength = Ship.GetLength(shipType);
-
             bool isOk = false;
+
             while (!isOk)
             {
                 Tuple<int, int, Direction> startPosition = _input.PlacementValidation();

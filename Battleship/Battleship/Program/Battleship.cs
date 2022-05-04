@@ -1,4 +1,5 @@
 ﻿using Battleship.Game;
+using Battleship.Enum;
 using Battleship.Util;
 
 namespace Battleship.Program
@@ -9,6 +10,7 @@ namespace Battleship.Program
         private protected Input _input;
         private protected int _gameMode;
         private protected int _boardSize;
+
         public Battleship()
         {
             _display = new Display();
@@ -23,6 +25,7 @@ namespace Battleship.Program
 
             while (true)
             {
+                Display.Clear(0);
                 program._display.PrintLogo();
                 program._display.Message("Welcome to our Battleship Game!\n");
                 switch (program.Menu())
@@ -36,6 +39,8 @@ namespace Battleship.Program
                         program._boardSize = program._input.BoardSizeValidation();
                         Display.Clear(0);
                         Gameplay.Game game = new Gameplay.Game(program._boardSize, program._gameMode);
+                        program._display.Message("\nPress a button to start a new game!");
+                        program._input.Select();
                         break;
                     case 2:
                         Display.Clear(0);

@@ -1,4 +1,5 @@
 ﻿using Battleship.Game;
+using Battleship.Enum;
 using Battleship.Util;
 
 namespace Battleship.Gameplay
@@ -16,7 +17,6 @@ namespace Battleship.Gameplay
             _gameMode = gameMode;
             _placementBoard = new Board(_boardSize, _gameMode, true);
             _shootingBoard = new Board(_boardSize, _gameMode, false);
-
             Play();
         }
 
@@ -38,7 +38,7 @@ namespace Battleship.Gameplay
 
         public string GetName(string player)
         {
-            _display.Message($"{player} please enter your name! ");
+            _display.Message($"{player} please enter your name!");
             return _input.Select();
         }
 
@@ -46,49 +46,47 @@ namespace Battleship.Gameplay
         {
             for (int index = 0; index < 1; index++)
             {
-                Display.Clear(1);
+                Display.Clear(2);
                 _display.Board(playerOne, playerTwo, _boardSize, _placementBoard);
-                _display.PlacementTurn(playerOne, (ShipType)index);
+                _display.PlacementTurn(playerOne, (Enum.ShipType)index);
                 boardFactory.ManualPlacement(playerOne, _placementBoard, (ShipType)index);
-                Display.Clear(1);
+                Display.Clear(0);
                 _display.Board(playerOne, playerTwo, _boardSize, _placementBoard);
 
-                Display.Clear(1);
+                Display.Clear(2);
                 _display.Board(playerTwo, playerOne, _boardSize, _placementBoard);
-                _display.PlacementTurn(playerTwo, (ShipType)index);
+                _display.PlacementTurn(playerTwo, (Enum.ShipType)index);
                 boardFactory.ManualPlacement(playerTwo, _placementBoard, (ShipType)index);
-                Display.Clear(1);
+                Display.Clear(0);
                 _display.Board(playerTwo, playerOne, _boardSize, _placementBoard);
             }
         }
 
-        public void ShootingPhase(Player _playerOne, Player _playerTwo, int _boardSize, Board _shootingBoard)
+        public void ShootingPhase(Player playerOne, Player playerTwo, int boardSize, Board shootingBoard)
         {
             while (true)
             {
-                Display.Clear(1);
-                _display.Board(_playerOne, _playerTwo, _boardSize, _shootingBoard);
-                _playerOne.Attack(_playerTwo);
-                Display.Clear(1);
-                _display.Board(_playerOne, _playerTwo, _boardSize, _shootingBoard);
+                Display.Clear(2);
+                _display.Board(playerOne, playerTwo, boardSize, shootingBoard);
+                playerOne.Attack(playerTwo, boardSize);
+                Display.Clear(0);
+                _display.Board(playerOne, playerTwo, boardSize, shootingBoard);
 
-                if (!IsGameOver(_playerTwo))
+                if (!IsGameOver(playerTwo))
                 {
-                    _display.Message("Game over!");
-                    _display.Message($"{_playerOne.Name} wins!");
+                    _display.Message($"{playerOne.Name} wins!");
                     break;
                 }
 
-                Display.Clear(1);
-                _display.Board(_playerTwo, _playerOne, _boardSize, _shootingBoard);
-                _playerTwo.Attack(_playerOne);
-                Display.Clear(1);
-                _display.Board(_playerTwo, _playerOne, _boardSize, _shootingBoard);
+                Display.Clear(2);
+                _display.Board(playerTwo, playerOne, boardSize, shootingBoard);
+                playerTwo.Attack(playerOne, boardSize);
+                Display.Clear(0);
+                _display.Board(playerTwo, playerOne, boardSize, shootingBoard);
 
-                if (!IsGameOver(_playerOne))
+                if (!IsGameOver(playerOne))
                 {
-                    _display.Message("Game over!");
-                    _display.Message($"{_playerTwo.Name} wins!");
+                    _display.Message($"{playerTwo.Name} wins!");
                     break;
                 }
             }

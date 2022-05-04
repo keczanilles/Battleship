@@ -70,40 +70,14 @@ namespace Battleship.Util
                 Console.Write($"{(char)(row + 65)}  ");
                 for (int col = 0; col < boardSize; col++)
                 {
-                    Console.Write(CheckSquareType(player, row, col, board));
+                    Console.Write(CheckSquareType(player, enemy, row, col, board));
                 }
                 Console.WriteLine();
             }
             Console.WriteLine();
         }
 
-        /*public void ShootingBoard(Player player, int boardSize, Board board)
-        {
-            Console.WriteLine();
-            for (int i = 1; i < boardSize + 1; i++)
-            {
-                if (i == 1)
-                {
-                    Console.Write($"   {i} ");
-                }
-                else
-                {
-                    Console.Write(i < 10 ? $" {i} " : $"{i} ");
-                }
-            }
-            Console.WriteLine();
-            for (int row = 0; row < boardSize; row++)
-            {
-                Console.Write($"{(char)(row + 65)}  ");
-                for (int col = 0; col < boardSize; col++)
-                {
-                    Console.Write(CheckSquareType(player, row, col));
-                }
-                Console.WriteLine();
-            }
-            Console.WriteLine();
-        }*/
-        public string CheckSquareType(Player player, int row, int col, Board board)
+        public string CheckSquareType(Player player, Player enemy, int row, int col, Board board)
         {
             if (board._boardType)
             {
@@ -123,12 +97,19 @@ namespace Battleship.Util
 
             if (player.Shots.Contains(new Tuple<int, int>(row, col)))
             {
-                foreach (var VARIABLE in COLLECTION)
+                foreach (Ship ship in enemy.GetShips())
                 {
-                    
+                    foreach (Square square in ship.GetSquares())
+                    {
+                        if (square.Position.Item1 == row && square.Position.Item2 == col)
+                        {
+                            return Square.GetCharacter(SquareStatus.Hit);
+                        }
+                    }   
                 }
                 return Square.GetCharacter(SquareStatus.Missed);
             }
+            
             return Square.GetCharacter(SquareStatus.Empty);
         }
 

@@ -32,13 +32,8 @@ namespace Battleship.Gameplay
             _playerOne = new Player(playerOneName);
             _playerTwo = new Player(playerTwoName);
             
-            PlayerPlacement(boardFactory, _playerOne, _playerTwo);
-            _playerOne.Attack(_playerTwo);
-            _playerOne.Attack(_playerTwo);
-            _display.Board(_playerOne, _playerTwo, _boardSize, _placementBoard);
-            _display.Board(_playerTwo, _playerOne, _boardSize, _placementBoard);
-            Console.ReadLine();
-
+            PlacementPhase(boardFactory, _playerOne, _playerTwo);
+            ShootingPhase(_playerOne, _playerTwo, _boardSize, _shootingBoard);
         }
 
         public string GetName(string player)
@@ -47,7 +42,7 @@ namespace Battleship.Gameplay
             return _input.Select();
         }
 
-        public void PlayerPlacement(BoardFactory boardFactory, Player playerOne, Player playerTwo)
+        public void PlacementPhase(BoardFactory boardFactory, Player playerOne, Player playerTwo)
         {
             for (int index = 0; index < 1; index++)
             {
@@ -64,6 +59,24 @@ namespace Battleship.Gameplay
                 boardFactory.ManualPlacement(playerTwo, _placementBoard, (ShipType)index);
                 Display.Clear(1);
                 _display.Board(playerTwo, playerOne, _boardSize, _placementBoard);
+            }
+        }
+
+        public void ShootingPhase(Player _playerOne, Player _playerTwo, int _boardSize, Board _shootingBoard)
+        {
+            while (true)
+            {
+                Display.Clear(0);
+                _display.Board(_playerOne, _playerTwo, _boardSize, _shootingBoard);
+                _playerOne.Attack(_playerTwo);
+                Display.Clear(1);
+                _display.Board(_playerOne, _playerTwo, _boardSize, _shootingBoard);
+
+                Display.Clear(0);
+                _display.Board(_playerTwo, _playerOne, _boardSize, _shootingBoard);
+                _playerTwo.Attack(_playerOne);
+                Display.Clear(1);
+                _display.Board(_playerTwo, _playerOne, _boardSize, _shootingBoard);
             }
         }
 

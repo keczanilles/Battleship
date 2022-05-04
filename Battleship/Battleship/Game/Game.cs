@@ -44,21 +44,21 @@ namespace Battleship.Gameplay
 
         public void PlacementPhase(BoardFactory boardFactory, Player playerOne, Player playerTwo)
         {
-            for (int index = 0; index < 1; index++)
+            for (int index = 0; index < 5; index++)
             {
                 Display.Clear(1);
-                _display.Board(playerOne, playerTwo, _boardSize, _placementBoard);
+                _display.Board(playerOne, playerTwo, _boardSize, _placementBoard, this);
                 _display.PlacementTurn(playerOne, (ShipType)index);
                 boardFactory.ManualPlacement(playerOne, _placementBoard, (ShipType)index);
                 Display.Clear(1);
-                _display.Board(playerOne, playerTwo, _boardSize, _placementBoard);
+                _display.Board(playerOne, playerTwo, _boardSize, _placementBoard, this);
 
                 Display.Clear(1);
-                _display.Board(playerTwo, playerOne, _boardSize, _placementBoard);
+                _display.Board(playerTwo, playerOne, _boardSize, _placementBoard, this);
                 _display.PlacementTurn(playerTwo, (ShipType)index);
                 boardFactory.ManualPlacement(playerTwo, _placementBoard, (ShipType)index);
                 Display.Clear(1);
-                _display.Board(playerTwo, playerOne, _boardSize, _placementBoard);
+                _display.Board(playerTwo, playerOne, _boardSize, _placementBoard, this);
             }
         }
 
@@ -66,22 +66,58 @@ namespace Battleship.Gameplay
         {
             while (true)
             {
-                Display.Clear(0);
-                _display.Board(_playerOne, _playerTwo, _boardSize, _shootingBoard);
+                Display.Clear(1);
+                _display.Board(_playerOne, _playerTwo, _boardSize, _shootingBoard, this);
                 _playerOne.Attack(_playerTwo);
+                hasSunked(_playerOne);
                 Display.Clear(1);
-                _display.Board(_playerOne, _playerTwo, _boardSize, _shootingBoard);
+                _display.Board(_playerOne, _playerTwo, _boardSize, _shootingBoard, this);
 
-                Display.Clear(0);
-                _display.Board(_playerTwo, _playerOne, _boardSize, _shootingBoard);
-                _playerTwo.Attack(_playerOne);
                 Display.Clear(1);
-                _display.Board(_playerTwo, _playerOne, _boardSize, _shootingBoard);
+                _display.Board(_playerTwo, _playerOne, _boardSize, _shootingBoard, this);
+                _playerTwo.Attack(_playerOne);
+                hasSunked(_playerTwo);
+                Display.Clear(1);
+                _display.Board(_playerTwo, _playerOne, _boardSize, _shootingBoard, this);
             }
         }
 
-        public bool IsGameOver()
+        public bool hasSunked(Player player)
         {
+            foreach (Ship ship in player.GetShips())
+            {
+                var hashSet = new HashSet<SquareStatus>();
+                foreach (Square square in ship.GetSquares())
+                {
+                    hashSet.Add(square.GetSquareStatus());
+                }
+                if (hashSet.Count == 1 && hashSet.Contains(SquareStatus.Hit))
+                {
+                    foreach (Square square in ship.GetSquares())
+                    {
+                        square.ChangeStatus(SquareStatus.Sunk);
+                    }
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool IsGameOver(Player player)
+        {
+            //var hashSet = new HashSet<SquareStatus>();
+            //foreach (Ship ship in player.GetShips())
+            //{
+            //    foreach (Square square in ship.GetSquares())
+            //    {
+            //        hashSet.Add(square.GetSquareStatus());
+            //    }
+            //}
+            //if (hashSet.Count == 1 && hashSet.Contains(SquareStatus.Sunk))
+            //{
+            //    return true;
+            //}
+            //return false;
             throw new NotImplementedException();
         }
     }

@@ -50,7 +50,7 @@ namespace Battleship.Util
             }
         }
 
-        public void Board(Player player, Player enemy, int boardSize, Board board)
+        public void Board(Player player, Player enemy, int boardSize, Board board, Gameplay.Game game)
         {
             Console.WriteLine();
             for (int i = 1; i < boardSize + 1; i++)
@@ -70,14 +70,14 @@ namespace Battleship.Util
                 Console.Write($"{(char)(row + 65)}  ");
                 for (int col = 0; col < boardSize; col++)
                 {
-                    Console.Write(CheckSquareType(player, enemy, row, col, board));
+                    Console.Write(CheckSquareType(player, enemy, row, col, board, game));
                 }
                 Console.WriteLine();
             }
             Console.WriteLine();
         }
 
-        public string CheckSquareType(Player player, Player enemy, int row, int col, Board board)
+        public string CheckSquareType(Player player, Player enemy, int row, int col, Board board, Gameplay.Game game)
         {
             if (board._boardType)
             {
@@ -105,11 +105,10 @@ namespace Battleship.Util
                         {
                             return Square.GetCharacter(SquareStatus.Hit);
                         }
-                    }   
+                    }
                 }
                 return Square.GetCharacter(SquareStatus.Missed);
             }
-            
             return Square.GetCharacter(SquareStatus.Empty);
         }
 

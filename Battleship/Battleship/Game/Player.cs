@@ -30,7 +30,17 @@
             _display.Message($"It's {Name}'s turn to attack!");
             Tuple<int, int> shot = _input.ShotValidation(Shots);
             Shots.Add(shot);
-
+            foreach (Ship ship in enemy.GetShips())
+            {
+                foreach (Square square in ship.GetSquares())
+                {
+                    if (square.Position.Item1 == shot.Item1 && square.Position.Item2 == shot.Item2)
+                    {
+                        square.ChangeStatus(SquareStatus.Hit);
+                    }
+                    
+                }
+            }
         }
     }
 }

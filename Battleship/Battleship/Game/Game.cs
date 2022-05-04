@@ -5,7 +5,8 @@ namespace Battleship.Gameplay
 {
     public class Game : Program.Battleship
     {
-        private Board _board;
+        private Board _placementBoard;
+        private Board _shootingBoard;
         private Player _playerOne;
         private Player _playerTwo;
 
@@ -13,7 +14,8 @@ namespace Battleship.Gameplay
         {
             _boardSize = boardSize;
             _gameMode = gameMode;
-            _board = new Board(_boardSize, _gameMode);
+            _placementBoard = new Board(_boardSize, _gameMode, true);
+            _shootingBoard = new Board(_boardSize, _gameMode, false);
 
             Play();
         }
@@ -29,10 +31,13 @@ namespace Battleship.Gameplay
 
             _playerOne = new Player(playerOneName);
             _playerTwo = new Player(playerTwoName);
-
-            //PlayerPlacement(boardFactory, _playerOne, _playerTwo);
+            
+            PlayerPlacement(boardFactory, _playerOne, _playerTwo);
             _playerOne.Attack(_playerTwo);
             _playerOne.Attack(_playerTwo);
+            _display.Board(_playerOne, _playerTwo, _boardSize, _placementBoard);
+            _display.Board(_playerTwo, _playerOne, _boardSize, _placementBoard);
+            Console.ReadLine();
 
         }
 
@@ -44,21 +49,21 @@ namespace Battleship.Gameplay
 
         public void PlayerPlacement(BoardFactory boardFactory, Player playerOne, Player playerTwo)
         {
-            for (int index = 0; index < 5; index++)
+            for (int index = 0; index < 1; index++)
             {
                 Display.Clear(1);
-                _display.Board(playerOne, _boardSize, _board);
+                _display.Board(playerOne, playerTwo, _boardSize, _placementBoard);
                 _display.PlacementTurn(playerOne, (ShipType)index);
-                boardFactory.ManualPlacement(playerOne, _board, (ShipType)index);
+                boardFactory.ManualPlacement(playerOne, _placementBoard, (ShipType)index);
                 Display.Clear(1);
-                _display.Board(playerOne, _boardSize, _board);
+                _display.Board(playerOne, playerTwo, _boardSize, _placementBoard);
 
                 Display.Clear(1);
-                _display.Board(playerTwo, _boardSize, _board);
+                _display.Board(playerTwo, playerOne, _boardSize, _placementBoard);
                 _display.PlacementTurn(playerTwo, (ShipType)index);
-                boardFactory.ManualPlacement(playerTwo, _board, (ShipType)index);
+                boardFactory.ManualPlacement(playerTwo, _placementBoard, (ShipType)index);
                 Display.Clear(1);
-                _display.Board(playerTwo, _boardSize, _board);
+                _display.Board(playerTwo, playerOne, _boardSize, _placementBoard);
             }
         }
 

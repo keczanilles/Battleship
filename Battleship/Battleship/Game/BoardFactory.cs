@@ -25,12 +25,12 @@ namespace Battleship.Game
                     {
                         if (startPosition.Item3 == Direction.Horizontal)
                         {
-                            Square square = new Square((startPosition.Item1, startPosition.Item2 + i), SquareStatus.Ship);
+                            Square square = new Square(new Tuple<int, int>(startPosition.Item1, startPosition.Item2 + i), SquareStatus.Ship);
                             ship.AddSquare(square);
                         }
                         else if (startPosition.Item3 == Direction.Vertical)
                         {
-                            Square square = new Square((startPosition.Item1 + i, startPosition.Item2), SquareStatus.Ship);
+                            Square square = new Square(new Tuple<int, int>(startPosition.Item1 + i, startPosition.Item2), SquareStatus.Ship);
                             ship.AddSquare(square);
                         }
                     }

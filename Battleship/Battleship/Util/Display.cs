@@ -50,7 +50,34 @@ namespace Battleship.Util
             }
         }
 
-        public void Board(Player player, int boardSize, Board board)
+        public void Board(Player player, Player enemy, int boardSize, Board board)
+        {
+            Console.WriteLine();
+            for (int i = 1; i < boardSize + 1; i++)
+            {
+                if (i == 1)
+                {
+                    Console.Write($"   {i} ");
+                }
+                else
+                {
+                    Console.Write(i < 10 ? $" {i} " : $"{i} ");
+                }
+            }
+            Console.WriteLine();
+            for (int row = 0; row < boardSize; row++)
+            {
+                Console.Write($"{(char)(row + 65)}  ");
+                for (int col = 0; col < boardSize; col++)
+                {
+                    Console.Write(CheckSquareType(player, row, col, board));
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine();
+        }
+
+        /*public void ShootingBoard(Player player, int boardSize, Board board)
         {
             Console.WriteLine();
             for (int i = 1; i < boardSize + 1; i++)
@@ -75,19 +102,32 @@ namespace Battleship.Util
                 Console.WriteLine();
             }
             Console.WriteLine();
-        }
-
-        public string CheckSquareType(Player player, int row, int col)
+        }*/
+        public string CheckSquareType(Player player, int row, int col, Board board)
         {
-            foreach (Ship ship in player.GetShips())
+            if (board._boardType)
             {
-                foreach (Square square in ship.GetSquares())
+                foreach (Ship ship in player.GetShips())
                 {
-                    if (row == square.Position.Item1 && col == square.Position.Item2)
+                    foreach (Square square in ship.GetSquares())
                     {
-                        return Square.GetCharacter(square.GetSquareStatus());
+                        if (row == square.Position.Item1 && col == square.Position.Item2)
+                        {
+                            return Square.GetCharacter(square.GetSquareStatus());
+                        }
                     }
                 }
+                return Square.GetCharacter(SquareStatus.Empty);
+            }
+            
+
+            if (player.Shots.Contains(new Tuple<int, int>(row, col)))
+            {
+                foreach (var VARIABLE in COLLECTION)
+                {
+                    
+                }
+                return Square.GetCharacter(SquareStatus.Missed);
             }
             return Square.GetCharacter(SquareStatus.Empty);
         }

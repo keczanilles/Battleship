@@ -6,21 +6,24 @@ namespace Battleship.Gameplay
     {
         private Square[,] _ocean;
         private int _boardSize;
+        public bool _boardType { get; set; }
 
-        public Board(int boardSize, int gameMode)
+        public Board(int boardSize, int gameMode, bool type)
         {
             _ocean = new Square[boardSize, boardSize];
             _boardSize = boardSize;
+            _boardType = type;
 
             for (int row = 0; row < boardSize; row++)
             {
                 for (int col = 0; col < boardSize; col++)
                 {
-                    _ocean[row, col] = new Square((row, col), SquareStatus.Empty);
+                    _ocean[row, col] = new Square(new Tuple<int, int>(row, col), SquareStatus.Empty);
                 }
             }
         }
 
+        
         public bool IsPlacementOk(Player player, Tuple<int, int, Direction> startPosition, int shipLength)
         {
             int row = startPosition.Item1;

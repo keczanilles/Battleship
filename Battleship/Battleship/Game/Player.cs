@@ -3,7 +3,7 @@
     public class Player : Program.Battleship
     {
         private List<Ship> _ships;
-        public bool IsAlive { get; }
+        public bool IsAlive { get; private set; }
         public string Name { get; private set; }
         public List<Tuple<int, int>> Shots { get; private set; }
         
@@ -13,6 +13,7 @@
             _ships = new List<Ship>();
             Name = name;
             Shots = new List<Tuple<int, int>>();
+            IsAlive = true;
         }
 
         public void AddShip(Ship ship)
@@ -23,6 +24,22 @@
         public List<Ship> GetShips()
         {
             return _ships;
+        }
+
+        public void IsOver()
+        {
+            var hashSet = new HashSet<SquareStatus>();
+            foreach (Ship ship in _ships)
+            {
+                foreach (Square square in ship.GetSquares())
+                {
+                    hashSet.Add(square.GetSquareStatus());
+                }
+            }
+            if (hashSet.Count == 1 && hashSet.Contains(SquareStatus.Hit))
+            {
+                IsAlive = false;
+            }
         }
 
         public void Attack(Player enemy)

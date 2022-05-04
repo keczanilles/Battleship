@@ -26,15 +26,15 @@ namespace Battleship.Gameplay
             switch (shiptype)
             {
                 case ShipType.Carrier:
-                    return 5;
-                case ShipType.Battleship:
-                    return 4;
-                case ShipType.Cruiser:
-                    return 3;
-                case ShipType.Submarine:
-                    return 3;
-                case ShipType.Destroyer:
                     return 2;
+                //case ShipType.Battleship:
+                //    return 4;
+                //case ShipType.Cruiser:
+                //    return 3;
+                //case ShipType.Submarine:
+                //    return 3;
+                //case ShipType.Destroyer:
+                //    return 2;
                 default:
                     return 0;
             }

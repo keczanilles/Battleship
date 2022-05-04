@@ -9,7 +9,6 @@ namespace Battleship.Program
         private protected Input _input;
         private protected int _gameMode;
         private protected int _boardSize;
-
         public Battleship()
         {
             _display = new Display();
@@ -19,26 +18,32 @@ namespace Battleship.Program
         public static void Main()
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
-           
+
             var program = new Battleship();
 
             while (true)
             {
-                program._display.Message("Welcome to the Battleship Game!");
+                program._display.PrintLogo();
+                program._display.Message("Welcome to our Battleship Game!\n");
                 switch (program.Menu())
                 {
                     case 1:
-                        program._display.Message("Please select the game mode:");
+                        Display.Clear(0);
+                        program._display.Message("Please select the game mode:\n");
                         program._gameMode = program.GameMode();
-                        program._display.Message("Please select the size of the board: /10 - 20/");
+                        Display.Clear(0);
+                        program._display.Message("Please select the size of the board: /10 - 20/\n");
                         program._boardSize = program._input.BoardSizeValidation();
+                        Display.Clear(0);
                         Gameplay.Game game = new Gameplay.Game(program._boardSize, program._gameMode);
                         break;
                     case 2:
+                        Display.Clear(0);
                         program._display.Message("High score!");
                         break;
                     case 3:
-                        program._display.Message("Game over!");
+                        Display.Clear(0);
+                        program._display.Message("This is the day you will always remember as the day you almost caught Captain Jack Sparrow.");
                         Environment.Exit(0);
                         break;
                 }

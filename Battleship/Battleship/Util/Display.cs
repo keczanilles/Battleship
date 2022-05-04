@@ -19,6 +19,29 @@ namespace Battleship.Util
             Console.WriteLine(message);
         }
 
+        public void NewLine()
+        {
+            Console.Write(Environment.NewLine);
+        }
+
+        public void PrintLogo()
+        {
+            Console.Write(@"                                     |__
+                                     |\/
+                                     ---
+                                     / | [
+                              !      | |||
+                            _/|     _/|-++'
+                        +  +--|    |--|--|_ |-
+                     { /|__|  |/\__|  |--- |||__/
+                    +---------------___[}-_===_.'____               /\
+                ____`-' ||___-{]_| _[}-  |     |_[___\==--          \/   _
+ __..._____--==/___]_|__|_____________________________[___\==--___,-----' .7
+|                                                      Don Juan d'Hungary/
+ \_______________________________________________________________________|");
+            Console.WriteLine(Environment.NewLine);
+        }
+
         public void Menu(params string[] options)
         {
             for (int i = 0; i < options.Length; i++)

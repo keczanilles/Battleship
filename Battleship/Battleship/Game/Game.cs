@@ -1,4 +1,5 @@
 ﻿using Battleship.Game;
+using Battleship.Util;
 
 namespace Battleship.Gameplay
 {
@@ -22,12 +23,12 @@ namespace Battleship.Gameplay
             var boardFactory = new BoardFactory();
 
             string playerOneName = GetName("Player 1");
+            _display.NewLine();
             string playerTwoName = GetName("Player 2");
+            Display.Clear(1);
 
             _playerOne = new Player(playerOneName);
             _playerTwo = new Player(playerTwoName);
-
-            //_display.Board(_boardSize, _board);
 
             PlayerPlacement(boardFactory, _playerOne, _playerTwo);
         }
@@ -42,12 +43,18 @@ namespace Battleship.Gameplay
         {
             for (int index = 0; index < 5; index++)
             {
+                Display.Clear(1);
+                _display.Board(playerOne, _boardSize, _board);
                 _display.PlacementTurn(playerOne, (ShipType)index);
                 boardFactory.ManualPlacement(playerOne, _board, (ShipType)index);
+                Display.Clear(1);
                 _display.Board(playerOne, _boardSize, _board);
 
+                Display.Clear(1);
+                _display.Board(playerTwo, _boardSize, _board);
                 _display.PlacementTurn(playerTwo, (ShipType)index);
                 boardFactory.ManualPlacement(playerTwo, _board, (ShipType)index);
+                Display.Clear(1);
                 _display.Board(playerTwo, _boardSize, _board);
             }
         }

@@ -27,7 +27,7 @@ namespace Battleship.Util
             }
         }
 
-        public void Board(int boardSize, Board board)
+        public void Board(Player player, int boardSize, Board board)
         {
             Console.WriteLine();
             for (int i = 1; i < boardSize + 1; i++)
@@ -45,15 +45,28 @@ namespace Battleship.Util
             for (int row = 0; row < boardSize; row++)
             {
                 Console.Write($"{(char)(row + 65)}  ");
-
                 for (int col = 0; col < boardSize; col++)
                 {
-                    SquareStatus squareStatus = board.CheckSquare((row, col));
-                    Console.Write(Square.GetCharacter(squareStatus));
+                    Console.Write(CheckSquareType(player, row, col));
                 }
                 Console.WriteLine();
             }
             Console.WriteLine();
+        }
+
+        public string CheckSquareType(Player player, int row, int col)
+        {
+            foreach (Ship ship in player.GetShips())
+            {
+                foreach (Square square in ship.GetSquares())
+                {
+                    if (row == square.Position.Item1 && col == square.Position.Item2)
+                    {
+                        return Square.GetCharacter(square.GetSquareStatus());
+                    }
+                }
+            }
+            return Square.GetCharacter(SquareStatus.Empty);
         }
 
         public void PlacementTurn(Player player, ShipType ship)

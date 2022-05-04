@@ -4,6 +4,7 @@
     {
         public (int,int) Position { get; set; }
         private SquareStatus _squareStatus;
+        private bool _revealed;
 
         public Square((int,int) position, SquareStatus status)
         {

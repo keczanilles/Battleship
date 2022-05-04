@@ -12,6 +12,7 @@
         {
             _ships = new List<Ship>();
             Name = name;
+            Shots = new List<Tuple<int, int>>();
         }
 
         public void AddShip(Ship ship)
@@ -27,7 +28,8 @@
         public void Attack(Player enemy)
         {
             _display.Message($"It's {Name}'s turn to attack!");
-            string move = _input.Select();
+            Tuple<int, int> shot = _input.ShotValidation(Shots);
+            Shots.Add(shot);
 
         }
     }

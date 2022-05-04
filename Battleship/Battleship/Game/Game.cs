@@ -30,7 +30,9 @@ namespace Battleship.Gameplay
             _playerOne = new Player(playerOneName);
             _playerTwo = new Player(playerTwoName);
 
-            PlayerPlacement(boardFactory, _playerOne, _playerTwo);
+            //PlayerPlacement(boardFactory, _playerOne, _playerTwo);
+            _playerOne.Attack(_playerTwo);
+            _playerOne.Attack(_playerTwo);
 
         }
 

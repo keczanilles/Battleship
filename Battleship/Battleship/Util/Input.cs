@@ -6,7 +6,7 @@
         {
             return Console.ReadLine();
         }
-        
+
         public bool InputValidation(int possibilities, string input)
         {
             string[] inputNumber = new string[possibilities];
@@ -19,6 +19,56 @@
                 return true;
             }
             return false;
+        }
+
+        public Tuple<int, int> ShotValidation(List<Tuple<int, int>> shots)
+        {
+            while (true)
+            {
+                bool isOk = true;
+                string input = Select();
+
+                if (input.Length == 2 && char.IsLetter(input[0]) && char.IsDigit(input[1]))
+                {
+                    int row = char.ToUpper(input[0]) - 65;
+                    int col = (input[1] - '0') - 1;
+
+                    foreach (Tuple<int, int> shot in shots)
+                    {
+                        if (row == shot.Item1 && col == shot.Item2)
+                        {
+                            isOk = false;
+                        }
+
+                    }
+                    if (isOk)
+                    {
+                        return Tuple.Create(row, col);
+                    }
+                    
+                }
+                else if (input.Length == 3 && char.IsLetter(input[0]) && char.IsDigit(input[1]) && char.IsDigit(input[2]))
+                {
+                    int row = char.ToUpper(input[0]) - 65;
+                    int col = (((input[1] - '0') * 10) + (input[2] - '0')) - 1;
+
+                    foreach (Tuple<int, int> shot in shots)
+                    {
+                        if (row == shot.Item1 && col == shot.Item2)
+                        {
+                            isOk = false;
+                        }
+                    }
+                    if (isOk)
+                    {
+                        return Tuple.Create(row, col);
+                    }
+                }
+                else
+                {
+                    new Display().Message("You have already tried this one!");
+                }
+            }
         }
 
         public int BoardSizeValidation()
@@ -41,7 +91,7 @@
             }
         }
 
-        public Tuple<int,int,Direction> PlacementValidation()
+        public Tuple<int, int, Direction> PlacementValidation()
         {
             while (true)
             {
@@ -85,7 +135,7 @@
                         continue;
                     }
                     return new Tuple<int, int, Direction>(row, col, direction);
-                } 
+                }
                 else
                 {
                     new Display().Message("Not a valid option!");

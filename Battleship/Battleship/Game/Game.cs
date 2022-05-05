@@ -83,11 +83,9 @@ namespace Battleship.Gameplay
                     _display.Board(playerTwo, playerOne, _boardSize, _placementBoard);
                 }
                 else
-                {
+                { 
                     Display.Clear(2);
-                    _display.Board(playerTwo, playerOne, _boardSize, _placementBoard);
-                    _display.Message("Computer is thinking about how to beat you.");
-                    Display.Clear(2);
+                    _display.Message("Computer is thinking about where to place a ship...");
                     boardFactory.ManualPlacement(playerTwo, _placementBoard, (ShipType)index);
                 }
                 

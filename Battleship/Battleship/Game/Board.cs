@@ -13,6 +13,11 @@ namespace Battleship.Gameplay
             _boardType = type;
         }
 
+
+        public int GetBoardSize()
+        {
+            return _boardSize;
+        }
         public bool IsPlacementOk(Player player, Tuple<int, int, Direction> startPosition, int shipLength)
         {
             int row = startPosition.Item1;

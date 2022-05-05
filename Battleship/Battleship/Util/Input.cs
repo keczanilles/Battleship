@@ -35,11 +35,11 @@ namespace Battleship.Util
                     {
                         return int.Parse(size);
                     }
-                    new Display().Message("Please provide a number between 10 and 20!", ConsoleColor.Red);
+                    new Display().Message("Please provide a number between 10 and 20:", ConsoleColor.Red);
                 }
                 catch (FormatException)
                 {
-                    new Display().Message("Please provide a number between 10 and 20!", ConsoleColor.Red);
+                    new Display().Message("Please provide a number between 10 and 20:", ConsoleColor.Red);
                 }
             }
         }

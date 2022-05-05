@@ -8,6 +8,7 @@ namespace Battleship.Gameplay
         public bool IsAlive { get; private set; } // megnézni csak get;
         public string Name { get; private set; }
         public List<Tuple<int, int>> Shots { get; private set; }
+        public int Turn { get; set; }
         
         public Player(string name)
         {
@@ -15,6 +16,7 @@ namespace Battleship.Gameplay
             Name = name;
             Shots = new List<Tuple<int, int>>();
             IsAlive = true;
+            Turn = 0;
         }
 
         public void AddShip(Ship ship)
@@ -59,6 +61,7 @@ namespace Battleship.Gameplay
                     
                 }
             }
+            Turn++;
         }
     }
 }

@@ -26,6 +26,7 @@ namespace Battleship.Program
             while (true)
             {
                 Display.Clear(0);
+                Console.WriteLine(AppDomain.CurrentDomain.BaseDirectory);
                 program._display.PrintLogo();
                 program._display.Message("Welcome to our Battleship Game!\n");
                 switch (program.Menu())
@@ -43,8 +44,7 @@ namespace Battleship.Program
                         program._input.Select();
                         break;
                     case 2:
-                        Display.Clear(0);
-                        program._display.Message("High score!");
+                        HighScore highScore = new HighScore();
                         break;
                     case 3:
                         Display.Clear(0);

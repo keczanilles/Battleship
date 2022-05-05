@@ -5,9 +5,14 @@ namespace Battleship.Game
 {
     public class BoardFactory : Program.Battleship
     {
-        public void RandomPlacement(Player player)
+        public Tuple<int, int, Direction> RandomPlacement(int boardSize)
         {
-
+            Random random = new Random();
+            int row = random.Next(0, boardSize);
+            int col = random.Next(0, boardSize);
+            List<Direction> directions = new List<Direction>() {Direction.Vertical, Direction.Horizontal};
+            Direction direction = directions[random.Next(0, 2)];
+            return new Tuple<int, int, Direction>(row, col, direction);
         }
 
         public void ManualPlacement(Player player, Board board, Enum.ShipType shipType)
@@ -18,7 +23,8 @@ namespace Battleship.Game
 
             while (!isOk)
             {
-                Tuple<int, int, Direction> startPosition = _input.PlacementValidation();
+                Tuple<int, int, Direction> startPosition =
+                    player.Type ? _input.PlacementValidation() : RandomPlacement(board.GetBoardSize());
                 if (board.IsPlacementOk(player, startPosition, shipLength))
                 {
                     for (int i = 0; i < shipLength; i++)
@@ -39,7 +45,10 @@ namespace Battleship.Game
                 }
                 else
                 {
-                    _display.Message("You can't place your ship here!", ConsoleColor.Red);
+                    if (player.Type)
+                    {
+                        _display.Message("You can't place your ship here!", ConsoleColor.Red);
+                    }
                 }
             }
         }

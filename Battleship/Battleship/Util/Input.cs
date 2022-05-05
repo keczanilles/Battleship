@@ -35,11 +35,11 @@ namespace Battleship.Util
                     {
                         return int.Parse(size);
                     }
-                    new Display().Message("Please provide a number between 10 and 20!", ConsoleColor.Red);
+                    new Display().Message("Please provide a number between 10 and 20:", ConsoleColor.Red);
                 }
                 catch (FormatException)
                 {
-                    new Display().Message("Please provide a number between 10 and 20!", ConsoleColor.Red);
+                    new Display().Message("Please provide a number between 10 and 20:", ConsoleColor.Red);
                 }
             }
         }
@@ -102,7 +102,12 @@ namespace Battleship.Util
             {
                 bool isOk = true;
                 string input = Select();
-                if (input.Length == 2 && char.IsLetter(input[0]) && char.IsDigit(input[1]))
+                if (input.ToUpper() == "Q")
+                {
+                    new Display().Message("Game over!");
+                    Environment.Exit(0);
+                }
+                else if (input.Length == 2 && char.IsLetter(input[0]) && char.IsDigit(input[1]))
                 {
                     int row = char.ToUpper(input[0]) - 65;
                     int col = (input[1] - '0') - 1;

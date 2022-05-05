@@ -24,27 +24,47 @@ namespace Battleship.Gameplay
         {
             var boardFactory = new BoardFactory();
 
-            string playerOneName = GetName("Player 1");
-            _display.NewLine();
-            string playerTwoName = GetName("Player 2");
-            Display.Clear(1);
-
-            _playerOne = new Player(playerOneName);
-            _playerTwo = new Player(playerTwoName);
-            
+            int difficulty = 0;
+            if (_gameMode == 1)
+            {
+                string playerOneName = GetName("Player 1");
+                _display.NewLine();
+                string playerTwoName = GetName("Player 2");
+                Display.Clear(1);
+                _playerOne = new Player(playerOneName, true);
+                _playerTwo = new Player(playerTwoName, true);
+            } else if (_gameMode == 2)
+            {
+                _display.Message("Select the difficulty:\n");
+                _display.Message("1. Easy");
+                _display.Message("2. Medium");
+                _display.Message("3. Hard");
+                difficulty = int.Parse(_input.Select());
+                Display.Clear(1);
+                string playerOneName = GetName("Player 1");
+                string playerTwoName = "Computer"; 
+                Display.Clear(1);
+                _playerOne = new Player(playerOneName, true);
+                _playerTwo = new ComputerPlayer(playerTwoName, false);
+            } else if (_gameMode == 3)
+            {
+                Display.Clear(1);
+                _playerOne = new Player("Computer 1", false);
+                _playerTwo = new ComputerPlayer("Computer 2", false);
+            }
             PlacementPhase(boardFactory, _playerOne, _playerTwo);
-            ShootingPhase(_playerOne, _playerTwo, _boardSize, _shootingBoard);
+            ShootingPhase(_playerOne, _playerTwo, _boardSize, _shootingBoard, difficulty);
         }
 
         public string GetName(string player)
         {
-            _display.Message($"{player} please enter your name!");
+            _display.Message($"{player} please enter your name:");
             return _input.Select();
         }
 
         public void PlacementPhase(BoardFactory boardFactory, Player playerOne, Player playerTwo)
         {
-            for (int index = 0; index < 1; index++)
+            for (int index = 0; index < 5; index++)
             {
                 Display.Clear(2);
                 _display.Board(playerOne, playerTwo, _boardSize, _placementBoard);
@@ -53,22 +73,34 @@ namespace Battleship.Gameplay
                 Display.Clear(0);
                 _display.Board(playerOne, playerTwo, _boardSize, _placementBoard);
 
-                Display.Clear(2);
-                _display.Board(playerTwo, playerOne, _boardSize, _placementBoard);
-                _display.PlacementTurn(playerTwo, (Enum.ShipType)index);
-                boardFactory.ManualPlacement(playerTwo, _placementBoard, (ShipType)index);
-                Display.Clear(0);
-                _display.Board(playerTwo, playerOne, _boardSize, _placementBoard);
+                if (playerTwo.Type)
+                {
+                    Display.Clear(2);
+                    _display.Board(playerTwo, playerOne, _boardSize, _placementBoard);
+                    _display.PlacementTurn(playerTwo, (Enum.ShipType)index);
+                    boardFactory.ManualPlacement(playerTwo, _placementBoard, (ShipType)index);
+                    Display.Clear(0);
+                    _display.Board(playerTwo, playerOne, _boardSize, _placementBoard);
+                }
+                else
+                {
+                    Display.Clear(2);
+                    _display.Board(playerTwo, playerOne, _boardSize, _placementBoard);
+                    _display.Message("Computer is thinking about how to beat you.");
+                    Display.Clear(2);
+                    boardFactory.ManualPlacement(playerTwo, _placementBoard, (ShipType)index);
+                }
+                
             }
         }
 
-        public void ShootingPhase(Player playerOne, Player playerTwo, int boardSize, Board shootingBoard)
+        public void ShootingPhase(Player playerOne, Player playerTwo, int boardSize, Board shootingBoard, int difficulty)
         {
             while (true)
             {
                 Display.Clear(2);
                 _display.Board(playerOne, playerTwo, boardSize, shootingBoard);
-                playerOne.Attack(playerTwo, boardSize);
+                playerOne.Attack(playerOne, playerTwo, boardSize);
                 Display.Clear(0);
                 _display.Board(playerOne, playerTwo, boardSize, shootingBoard);
 
@@ -81,7 +113,7 @@ namespace Battleship.Gameplay
 
                 Display.Clear(2);
                 _display.Board(playerTwo, playerOne, boardSize, shootingBoard);
-                playerTwo.Attack(playerOne, boardSize);
+                playerTwo.Attack(playerTwo, playerOne, boardSize);
                 Display.Clear(0);
                 _display.Board(playerTwo, playerOne, boardSize, shootingBoard);
 

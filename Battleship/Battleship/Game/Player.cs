@@ -48,10 +48,20 @@ namespace Battleship.Gameplay
             }
         }
 
-        public void Attack(Player enemy, int boardSize)
+        public void Attack(Player player, Player enemy, int boardSize)
         {
-            _display.Message($"It's {Name}'s turn to attack:");
-            Tuple<int, int> shot = _input.ShotValidation(Shots, boardSize);
+            if (player.Type)
+            {
+                _display.Message($"It's {Name}'s turn to attack:");
+            }
+            else
+            {
+                _display.Message($"It's {Name}'s turn to attack!");
+                Thread.Sleep(2000);
+            }
+
+            Tuple<int, int> shot = player.Type ? _input.ShotValidation(Shots, boardSize) : RandomAttack(boardSize);
+
             Shots.Add(shot);
             foreach (Ship ship in enemy.GetShips())
             {
@@ -65,6 +75,21 @@ namespace Battleship.Gameplay
                 }
             }
             Turn++;
+        }
+
+        public Tuple<int, int> RandomAttack(int boardSize)
+        {
+            Random random = new Random();
+            while (true)
+            {
+                int row = random.Next(0, boardSize);
+                int col = random.Next(0, boardSize);
+                if (!Shots.Contains(new Tuple<int, int>(row, col)))
+                {
+                    return new Tuple<int, int>(row, col);
+                }
+            }
+
         }
     }
 }

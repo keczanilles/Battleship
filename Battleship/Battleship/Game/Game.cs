@@ -98,7 +98,7 @@ namespace Battleship.Gameplay
             {
                 Display.Clear(2);
                 _display.Board(playerOne, playerTwo, boardSize, shootingBoard);
-                playerOne.Attack(playerTwo, boardSize);
+                playerOne.Attack(playerOne, playerTwo, boardSize);
                 Display.Clear(0);
                 _display.Board(playerOne, playerTwo, boardSize, shootingBoard);
 
@@ -111,7 +111,7 @@ namespace Battleship.Gameplay
 
                 Display.Clear(2);
                 _display.Board(playerTwo, playerOne, boardSize, shootingBoard);
-                playerTwo.Attack(playerOne, boardSize);
+                playerTwo.Attack(playerTwo, playerOne, boardSize);
                 Display.Clear(0);
                 _display.Board(playerTwo, playerOne, boardSize, shootingBoard);
 

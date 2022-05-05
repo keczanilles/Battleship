@@ -45,9 +45,13 @@ namespace Battleship.Gameplay
                 string playerTwoName = "Computer"; 
                 Display.Clear(1);
                 _playerOne = new Player(playerOneName, true);
-                _playerTwo = new Player(playerTwoName, false);
+                _playerTwo = new ComputerPlayer(playerTwoName, false);
+            } else if (_gameMode == 3)
+            {
+                Display.Clear(1);
+                _playerOne = new Player("Computer 1", false);
+                _playerTwo = new ComputerPlayer("Computer 2", false);
             }
-
             PlacementPhase(boardFactory, _playerOne, _playerTwo);
             ShootingPhase(_playerOne, _playerTwo, _boardSize, _shootingBoard, difficulty);
         }
@@ -60,7 +64,7 @@ namespace Battleship.Gameplay
 
         public void PlacementPhase(BoardFactory boardFactory, Player playerOne, Player playerTwo)
         {
-            for (int index = 0; index < 1; index++)
+            for (int index = 0; index < 5; index++)
             {
                 Display.Clear(2);
                 _display.Board(playerOne, playerTwo, _boardSize, _placementBoard);
@@ -85,8 +89,6 @@ namespace Battleship.Gameplay
                     _display.Message("Computer is thinking about how to beat you.");
                     Display.Clear(2);
                     boardFactory.ManualPlacement(playerTwo, _placementBoard, (ShipType)index);
-                    
-                    _display.Board(playerTwo, playerOne, _boardSize, _placementBoard);
                 }
                 
             }

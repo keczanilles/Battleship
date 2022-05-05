@@ -1,4 +1,5 @@
 ﻿using Battleship.Enum;
+using Battleship.Game;
 
 namespace Battleship.Gameplay
 {
@@ -6,9 +7,9 @@ namespace Battleship.Gameplay
     {
         private List<Ship> _ships;
 
-        public bool Type { get; private set; }
+        public bool Type { get; set; }
         public bool IsAlive { get; private set; } // megnézni csak get;
-        public string Name { get; private set; }
+        public string Name { get; set; }
         public List<Tuple<int, int>> Shots { get; private set; }
         public int Turn { get; set; }
 
@@ -60,7 +61,7 @@ namespace Battleship.Gameplay
                 Thread.Sleep(2000);
             }
 
-            Tuple<int, int> shot = player.Type ? _input.ShotValidation(Shots, boardSize) : RandomAttack(boardSize);
+            Tuple<int, int> shot = player.Type ? _input.ShotValidation(Shots, boardSize) : new ComputerPlayer(Name, Type).RandomAttack(boardSize, Shots);
 
             Shots.Add(shot);
             foreach (Ship ship in enemy.GetShips())
@@ -75,21 +76,6 @@ namespace Battleship.Gameplay
                 }
             }
             Turn++;
-        }
-
-        public Tuple<int, int> RandomAttack(int boardSize)
-        {
-            Random random = new Random();
-            while (true)
-            {
-                int row = random.Next(0, boardSize);
-                int col = random.Next(0, boardSize);
-                if (!Shots.Contains(new Tuple<int, int>(row, col)))
-                {
-                    return new Tuple<int, int>(row, col);
-                }
-            }
-
         }
     }
 }

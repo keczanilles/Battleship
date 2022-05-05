@@ -72,9 +72,9 @@ namespace Battleship.Program
 
         public int GameMode()
         {
-            _display.Menu("Player vs. Player", "Player vs. Computer");
+            _display.Menu("Player vs. Player", "Player vs. Computer", "Computer vs. Computer");
             string select = _input.Select();
-            while (_input.InputValidation(2, select) is false)
+            while (_input.InputValidation(3, select) is false)
             {
                 _display.Message("Not valid option!", ConsoleColor.Red);
                 select = _input.Select();

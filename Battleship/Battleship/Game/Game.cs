@@ -74,6 +74,7 @@ namespace Battleship.Gameplay
 
                 if (!IsGameOver(playerTwo))
                 {
+                    new Score(playerOne.Turn, playerOne.Name);
                     _display.Message($"{playerOne.Name} wins!");
                     break;
                 }
@@ -86,6 +87,7 @@ namespace Battleship.Gameplay
 
                 if (!IsGameOver(playerOne))
                 {
+                    new Score(playerTwo.Turn, playerTwo.Name);
                     _display.Message($"{playerTwo.Name} wins!");
                     break;
                 }

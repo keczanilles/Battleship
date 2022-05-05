@@ -1,0 +1,3 @@
+﻿Dalma: 2
+Viktor: 1
+Illés: 88

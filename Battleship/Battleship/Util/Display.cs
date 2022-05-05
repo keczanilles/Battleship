@@ -15,9 +15,16 @@ namespace Battleship.Util
             Console.Clear();
         }
 
-        public void Message(string message)
+        public void Message(string message, ConsoleColor color = ConsoleColor.White)
         {
+            Console.ForegroundColor = color;
             Console.WriteLine(message);
+            Console.ResetColor();
+        }
+
+        public void InlineMessage(string message)
+        {
+            Console.Write(message);
         }
 
         public void NewLine()
@@ -25,8 +32,9 @@ namespace Battleship.Util
             Console.Write(Environment.NewLine);
         }
 
-        public void PrintLogo()
+        public void PrintLogo(ConsoleColor color)
         {
+            Console.ForegroundColor = color;
             Console.Write(@"                                     |__
                                      |\/
                                      ---
@@ -41,6 +49,7 @@ namespace Battleship.Util
 |                                                      Don Juan d'Hungary/
  \_______________________________________________________________________|");
             Console.WriteLine(Environment.NewLine);
+            Console.ResetColor();
         }
 
         public void Menu(params string[] options)
@@ -54,21 +63,28 @@ namespace Battleship.Util
         public void Board(Player player, Player enemy, int boardSize, Board board)
         {
             Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            string halfSpace = "\u2000";
+            
+
             for (int i = 1; i < boardSize + 1; i++)
             {
                 if (i == 1)
                 {
-                    Console.Write($"   {i} ");
+                    Console.Write($"{halfSpace}  0{i}  ");
                 }
                 else
                 {
-                    Console.Write(i < 10 ? $" {i} " : $"{i} ");
+                    Console.Write(i < 10 ? $"0{i}  " : $"{i}  ");
                 }
             }
+            Console.ResetColor();
             Console.WriteLine();
             for (int row = 0; row < boardSize; row++)
             {
+                Console.ForegroundColor = ConsoleColor.Blue;
                 Console.Write($"{(char)(row + 65)}  ");
+                Console.ResetColor();
                 for (int col = 0; col < boardSize; col++)
                 {
                     Console.Write(CheckSquareType(player, enemy, row, col, board));

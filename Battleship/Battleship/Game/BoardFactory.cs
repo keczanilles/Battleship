@@ -39,7 +39,7 @@ namespace Battleship.Game
                 }
                 else
                 {
-                    _display.Message("You can't place your ship here!");
+                    _display.Message("You can't place your ship here!", ConsoleColor.Red);
                 }
             }
         }

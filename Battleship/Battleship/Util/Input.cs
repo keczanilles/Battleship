@@ -6,6 +6,7 @@ namespace Battleship.Util
     {
         public string Select()
         {
+            new Display().InlineMessage("- ");
             return Console.ReadLine();
         }
 
@@ -34,11 +35,11 @@ namespace Battleship.Util
                     {
                         return int.Parse(size);
                     }
-                    new Display().Message("Please provide a number between 10 and 20!");
+                    new Display().Message("Please provide a number between 10 and 20!", ConsoleColor.Red);
                 }
                 catch (FormatException)
                 {
-                    new Display().Message("Please provide a number between 10 and 20!");
+                    new Display().Message("Please provide a number between 10 and 20!", ConsoleColor.Red);
                 }
             }
         }
@@ -47,7 +48,7 @@ namespace Battleship.Util
         {
             while (true)
             {
-                string input = Console.ReadLine();
+                string input = Select();
                 if (input.Length == 3 && Char.IsLetter(input[0]) && Char.IsDigit(input[1]) && Char.IsLetter(input[2]))
                 {
                     int row = char.ToUpper(input[0]) - 65;
@@ -63,7 +64,7 @@ namespace Battleship.Util
                     }
                     else
                     {
-                        new Display().Message("Not valid direction!");
+                        new Display().Message("Not valid direction!", ConsoleColor.Red);
                         continue;
                     }
                     return new Tuple<int, int, Direction>(row, col, direction);
@@ -83,14 +84,14 @@ namespace Battleship.Util
                     }
                     else
                     {
-                        new Display().Message("Not valid direction!");
+                        new Display().Message("Not valid direction!", ConsoleColor.Red);
                         continue;
                     }
                     return new Tuple<int, int, Direction>(row, col, direction);
                 }
                 else
                 {
-                    new Display().Message("Not a valid option!");
+                    new Display().Message("Not a valid option!", ConsoleColor.Red);
                 }
             }
         }
@@ -120,12 +121,12 @@ namespace Battleship.Util
                         }
                         else
                         {
-                            new Display().Message("You have already tried this one!");
+                            new Display().Message("You have already tried this one!", ConsoleColor.Red);
                         }
                     }
                     else
                     {
-                        new Display().Message("Not valid option!");
+                        new Display().Message("Not valid option!", ConsoleColor.Red);
                     }
                 }
                 else if (input.Length == 3 && char.IsLetter(input[0]) && char.IsDigit(input[1]) && char.IsDigit(input[2]))
@@ -147,12 +148,12 @@ namespace Battleship.Util
                         }
                         else
                         {
-                            new Display().Message("You have already tried this one!");
+                            new Display().Message("You have already tried this one!", ConsoleColor.Red);
                         }
                     }
                     else
                     {
-                        new Display().Message("Not valid option!");
+                        new Display().Message("Not valid option!", ConsoleColor.Red);
                     }
                 }
             }

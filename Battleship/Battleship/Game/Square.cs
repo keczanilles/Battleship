@@ -25,10 +25,10 @@ namespace Battleship.Gameplay
 
         public static string GetCharacter(SquareStatus status)
         {
-            string empty = ".  ";
-            string ship = "B  ";
-            string hit = "H  ";
-            string missed = "X  ";
+            string empty = "🟦  ";
+            string ship = "🚢  ";
+            string hit = "🔥  ";
+            string missed = "❌  ";
             switch (status)
             {
                 case SquareStatus.Empty:

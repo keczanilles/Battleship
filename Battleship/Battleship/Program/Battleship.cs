@@ -26,7 +26,7 @@ namespace Battleship.Program
             while (true)
             {
                 Display.Clear(0);
-                program._display.PrintLogo();
+                program._display.PrintLogo(ConsoleColor.Blue);
                 program._display.Message("Welcome to our Battleship Game!\n");
                 switch (program.Menu())
                 {
@@ -35,7 +35,7 @@ namespace Battleship.Program
                         program._display.Message("Please select the game mode:\n");
                         program._gameMode = program.GameMode();
                         Display.Clear(0);
-                        program._display.Message("Please select the size of the board: /10 - 20/\n");
+                        program._display.Message("Please select the size of the board: /10 - 20/");
                         program._boardSize = program._input.BoardSizeValidation();
                         Display.Clear(0);
                         Gameplay.Game game = new Gameplay.Game(program._boardSize, program._gameMode);
@@ -64,8 +64,8 @@ namespace Battleship.Program
             string select = _input.Select();
             while (_input.InputValidation(3, select) is false)
             {
-                _display.Message("Not valid option!");
-                select = Console.ReadLine();
+                _display.Message("Not valid option!", ConsoleColor.Red);
+                select = _input.Select();
             }
             return int.Parse(select);
         }
@@ -76,8 +76,8 @@ namespace Battleship.Program
             string select = _input.Select();
             while (_input.InputValidation(2, select) is false)
             {
-                _display.Message("Not valid option!");
-                select = Console.ReadLine();
+                _display.Message("Not valid option!", ConsoleColor.Red);
+                select = _input.Select();
             }
             return int.Parse(select);
         }

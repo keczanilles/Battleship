@@ -1,0 +1,10 @@
+﻿Dalma: 2
+Viktor: 2
+Illés: 2
+Rausz: 4
+Ákos: 5
+Vendel: 4
+Zsolt: 3
+Gergő: 4
+Sanyi: 5
+Kornél: 1
